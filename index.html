@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Logic Gate Simulator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #a6c9f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    h2 { margin-top: 0; color: #1e293b; font-size: 20px; }
+    .control-group {
+      margin: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      font-size: 15px;
+      width: 55%;
+    }
+    .result-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #dddfe1;
+      border: 2px dashed #3b82f6;
+      border-radius: 8px;
+    }
+    .output-value {
+      font-size: 28px;
+      font-weight: bold;
+      color: #1d4ed8;
+      margin: 5px 0 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Logic Gates Simulator</h2>
+
+  <div class="control-group">
+    <label>Select Gate:</label>
+    <select id="gateSelect" onchange="calculateLogic()">
+      <option value="AND">AND Gate</option>
+      <option value="OR">OR Gate</option>
+      <option value="XOR">XOR Gate</option>
+      <option value="NAND">NAND Gate</option>
+      <option value="NOR">NOR Gate</option>
+    </select>
+  </div>
+
+  <div class="control-group">
+    <label>Input A:</label>
+    <select id="inputA" onchange="calculateLogic()">
+      <option value="0">0 (False)</option>
+      <option value="1">1 (True)</option>
+    </select>
+  </div>
+
+  <div class="control-group">
+    <label>Input B:</label>
+    <select id="inputB" onchange="calculateLogic()">
+      <option value="0">0 (False)</option>
+      <option value="1">1 (True)</option>
+    </select>
+  </div>
+
+  <div class="result-box">
+    <div>Output:</div>
+    <div class="output-value" id="outputVal">0</div>
+  </div>
+</div>
+
+<script>
+  function calculateLogic() {
+    let gate = document.getElementById("gateSelect").value;
+    let a = parseInt(document.getElementById("inputA").value, 10);
+    let b = parseInt(document.getElementById("inputB").value, 10);
+    let result = 0;
+
+    if (gate == "AND") {
+      result = (a && b) ? 1 : 0;
+    } else if (gate == "OR") {
+      result = (a || b) ? 1 : 0;
+    } else if (gate == "XOR") {
+      result = (a !== b) ? 1 : 0;
+    } else if (gate == "NAND") {
+      result = !(a && b) ? 1 : 0;
+    } else if (gate == "NOR") {
+      result = !(a || b) ? 1 : 0;
+    }
+
+    document.getElementById("outputVal").innerText = result;
+  }
+
+  calculateLogic();
+</script>
+
+</body>
+</html>
